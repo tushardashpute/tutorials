@@ -46,6 +46,9 @@ kubectl get ingressclass
 ## Prometheus
 kubectl port-forward svc/prometheus-operated 9090 -n monitoring
 
+curl http://api.devopsbyexample.io/foo
+curl http://api.devopsbyexample.io/bar
+
 ## Clean Up
 - `helm repo remove nginx-stable`
 
