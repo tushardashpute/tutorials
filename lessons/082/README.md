@@ -44,6 +44,12 @@ helm -n ingress install --version 3.35.0 ingress-nginx ingress-nginx/ingress-ngi
 
 kubectl get ingressclass
 
+https://github.com/cloudflare/cfssl
+
+https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/04-certificate-authority.md
+
+brew install cfssl
+
 ## Prometheus
 kubectl port-forward svc/prometheus-operated 9090 -n monitoring
 
@@ -65,3 +71,15 @@ curl http://bar.devopsbyexample.io/
 - [Which Ingress Controller Do I Need?](https://docs.nginx.com/nginx-ingress-controller/intro/nginx-ingress-controllers)
 - [values.yaml](https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml)
 - [Configuration options](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#configuration-options)
+
+
+
+
+
+
+
+
+Generate the CA configuration file, certificate, and private key:
+-config=""
+
+cfssl gencert -initca ca-csr.json
