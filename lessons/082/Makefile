@@ -1,3 +1,10 @@
-all: docker
-docker:
-	docker build -t aputrabay/082-service-1:v0.1.0 -f app/Dockerfile app/
+REPO=aputrabay
+IMAGE=lesson-082
+VERSION=v0.1.0
+
+all: build-docker push-docker
+
+build-docker:
+	docker build -t ${REPO}/${IMAGE}:${VERSION} -f app/Dockerfile app/
+push-docker:
+	docker push ${REPO}/${IMAGE}:${VERSION}
