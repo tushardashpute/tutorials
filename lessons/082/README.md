@@ -72,7 +72,7 @@ curl http://bar.devopsbyexample.io/
 - [Which Ingress Controller Do I Need?](https://docs.nginx.com/nginx-ingress-controller/intro/nginx-ingress-controllers)
 - [values.yaml](https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml)
 - [Configuration options](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#configuration-options)
-
+- [Exposing TCP and UDP services](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/)
 
 
 
@@ -114,3 +114,11 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm template -n database --version 10.9.3 postgres bitnami/postgresql --output-dir postgres-helm
 
 psql --host localhost --port 5432 --username postgres --password
+
+- --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+
+- name: postgres
+  port: 5432
+  protocol: TCP
+
+psql --host a5919b05642104f4896d2dd0d08c8407-347fbf2a7b44f1ce.elb.us-east-1.amazonaws.com --port 5432 --username postgres --password
