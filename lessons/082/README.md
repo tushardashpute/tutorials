@@ -9,6 +9,7 @@
 5. Create ingress for Prometheus
 6. Create ingress for Grafana
 7. Simple fanout example
+Name based virtual hosting
 8. Fanout in different namespaces example
 9. Virual hosting
 10. tls
@@ -48,6 +49,9 @@ kubectl port-forward svc/prometheus-operated 9090 -n monitoring
 
 curl http://api.devopsbyexample.io/foo
 curl http://api.devopsbyexample.io/bar
+
+curl http://foo.devopsbyexample.io/
+curl http://bar.devopsbyexample.io/
 
 ## Clean Up
 - `helm repo remove nginx-stable`
