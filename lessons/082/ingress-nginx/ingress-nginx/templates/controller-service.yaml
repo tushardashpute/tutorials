@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: ingress-nginx-controller
-  namespace: default
+  namespace: ingress
 spec:
   type: LoadBalancer
   ports:

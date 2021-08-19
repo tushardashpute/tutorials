@@ -33,6 +33,6 @@ webhooks:
       - v1beta1
     clientConfig:
       service:
-        namespace: "default"
+        namespace: "ingress"
         name: ingress-nginx-controller-admission
         path: /networking/v1beta1/ingresses

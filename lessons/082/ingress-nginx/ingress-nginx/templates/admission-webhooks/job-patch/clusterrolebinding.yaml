@@ -21,4 +21,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: ingress-nginx-admission
-    namespace: "default"
+    namespace: "ingress"

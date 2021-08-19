@@ -8,8 +8,6 @@ import (
 )
 
 func main() {
-	// http.Handle("/foo", fooHandler)
-
 	http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Method: %s", r.Method)
 		log.Printf("Protocol: %s", r.Proto)

@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: ingress-nginx
-  namespace: default
+  namespace: ingress
 rules:
   - apiGroups:
       - ""
