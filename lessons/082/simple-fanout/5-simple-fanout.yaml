@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: simple-fanout-example
+  name: simple-fanout
   namespace: staging
 spec:
   rules:
@@ -15,11 +15,11 @@ spec:
           service:
             name: foo
             port:
-              number: 8080
+              number: 5698
       - path: /bar
         pathType: Prefix
         backend:
           service:
             name: bar
             port:
-              number: 9090
+              number: 8956

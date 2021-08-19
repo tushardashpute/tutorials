@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
       - name: foo
-        image: aputrabay/lesson-082:v0.1.1
+        image: aputrabay/lesson-082:v0.1.3
         args:
         - -name
         - foo
         - -port
-        - 5698
+        - "5698"
         ports:
         - name: http
           containerPort: 5698

@@ -1,6 +1,6 @@
 REPO=aputrabay
 IMAGE=lesson-082
-VERSION=v0.1.1
+VERSION=v0.1.3
 
 all: build-docker push-docker
 
