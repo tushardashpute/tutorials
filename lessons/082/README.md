@@ -101,3 +101,6 @@ openssl x509 -in foo-api.pem -text -noout
 
 Default backend:  default-http-backend:80 (<error: endpoints "default-http-backend" not found>)
 Starting on September 1st (2020), SSL/TLS certificates cannot be issued for longer than 13 months (397 days).
+
+GRAFANA 9614
+kubectl get ns --show-labels
