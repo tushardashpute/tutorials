@@ -75,15 +75,26 @@ curl http://bar.devopsbyexample.io/
 
 
 
-
-
-
-
 Generate the CA configuration file, certificate, and private key:
 -config=""
 
 cfssl gencert -initca ca-csr.json | cfssljson -bare ca
 openssl x509 -in ca.pem -text -noout
 
-Not Before: Aug 19 17:08:00 2021 GMT
-Not After : Aug 18 17:08:00 2026 GMT
+CN: CommonName
+OU: OrganizationalUnit
+O: Organization
+L: Locality
+S: StateOrProvinceName
+C: CountryName
+
+
+cfssl gencert \
+  -ca=ca.pem \
+  -ca-key=ca-key.pem \
+  -config=config.json \
+  -profile=demo \
+  foo-api-csr.json | cfssljson -bare foo-api
+
+openssl x509 -in foo-api.pem -text -noout
+
