@@ -109,3 +109,8 @@ webhook? works?
 http2 works??
 
 curl http://api-ns.devopsbyexample.io/foo/asd
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm template -n database --version 10.9.3 postgres bitnami/postgresql --output-dir postgres-helm
+
+psql --host localhost --port 5432 --username postgres --password
