@@ -4,8 +4,8 @@
 
 1. Deploy Prometheus
 2. Deploy Grafana
-3. Deploy Ingress with YAML
 4. Show how to deploy with helm
+3. Deploy Ingress with YAML
 5. Create ingress for Prometheus
 6. Create ingress for Grafana
 7. Simple fanout example

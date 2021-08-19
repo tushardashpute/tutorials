@@ -3,21 +3,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: staging
-  name: foo
+  name: bar
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: foo
+      app: bar
   template:
     metadata:
       labels:
-        app: foo
+        app: bar
     spec:
       containers:
-      - name: foo
-        image: aputrabay/lesson-082:v0.1.0
+      - name: bar
+        image: aputrabay/lesson-082:v0.1.1
+        args:
+        - -name
+        - bar
+        - -port
+        - 8956
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 8956
           protocol: TCP

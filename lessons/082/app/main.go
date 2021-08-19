@@ -1,15 +1,17 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"html"
 	"log"
 	"net/http"
-	"flag"
+	"strconv"
 )
 
 func main() {
 	name := flag.String("name", "", "service name")
+	port := flag.Int("port", 0, "port number")
 	flag.Parse()
 
 	http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
@@ -21,5 +23,5 @@ func main() {
 		fmt.Fprintf(w, "Hello from %s, resource: %q\n", *name, html.EscapeString(r.URL.Path))
 	})
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(*port), nil))
 }
