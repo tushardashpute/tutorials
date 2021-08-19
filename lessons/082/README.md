@@ -10,7 +10,7 @@ Topics
 - [TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) great segue to cert-manager
 - classic loadbalancer vs network vs application
 - internal vs external
-
+- http/2 h2 h2c (plain text http)
 
 
 ```
@@ -26,6 +26,8 @@ helm repo update
 helm -n ingress template --version 3.35.0 ingress-nginx ingress-nginx/ingress-nginx -f values.yaml --output-dir ingress
 helm -n ingress install --version 3.35.0 ingress-nginx ingress-nginx/ingress-nginx -f values.yaml --create-namespace
 ```
+
+kubectl get ingressclass
 
 ## Prometheus
 kubectl port-forward svc/prometheus-operated 9090 -n monitoring
