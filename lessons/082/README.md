@@ -27,7 +27,7 @@ helm -n ingress template --version 3.35.0 ingress-nginx ingress-nginx/ingress-ng
 helm -n ingress install --version 3.35.0 ingress-nginx ingress-nginx/ingress-nginx -f values.yaml --create-namespace
 ```
 
-Prometheus
+## Prometheus
 kubectl port-forward svc/prometheus-operated 9090 -n monitoring
 
 ## Clean Up
