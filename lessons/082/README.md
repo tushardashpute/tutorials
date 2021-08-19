@@ -2,6 +2,19 @@
 
 [YouTube Tutorial]()
 
+1. Deploy Prometheus
+2. Deploy Grafana
+3. Deploy Ingress with YAML
+4. Show how to deploy with helm
+5. Create ingress for Prometheus
+6. Create ingress for Grafana
+7. Simple fanout example
+8. Fanout in different namespaces example
+9. Virual hosting
+10. tls
+11. tcp
+12. Prometheus/Grafana monitoring
+
 Topics
 - rewrite-target
 - An Ingress allows you to keep the number of load balancers down to a minimum
