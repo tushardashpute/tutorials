@@ -8,6 +8,8 @@ Topics
 - [Simple fanout](https://kubernetes.io/docs/concepts/services-networking/ingress/#simple-fanout)
 - [Name based virtual hosting](https://kubernetes.io/docs/concepts/services-networking/ingress/#name-based-virtual-hosting)
 - [TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) great segue to cert-manager
+- classic loadbalancer vs network vs application
+- internal vs external
 
 
 
