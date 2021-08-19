@@ -22,8 +22,11 @@ eksctl create cluster -f eks.yaml
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 helm -n ingress template --version 3.35.0 ingress-nginx ingress-nginx/ingress-nginx -f values.yaml --output-dir ingress
-helm -n ingress install --version 3.35.0 ingress-nginx ingress-nginx/ingress-nginx -f values.yaml
+helm -n ingress install --version 3.35.0 ingress-nginx ingress-nginx/ingress-nginx -f values.yaml --create-namespace
 ```
+
+Prometheus
+kubectl port-forward svc/prometheus-operated 9090 -n monitoring
 
 ## Clean Up
 - `helm repo remove nginx-stable`
