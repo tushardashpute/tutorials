@@ -11,7 +11,7 @@ controller:
   affinity:
     podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
+      - labelSelector:
           matchExpressions:
             - key: app.kubernetes.io/name
               operator: In
