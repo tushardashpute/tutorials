@@ -104,3 +104,8 @@ Starting on September 1st (2020), SSL/TLS certificates cannot be issued for long
 
 GRAFANA 9614
 kubectl get ns --show-labels
+
+webhook? works?
+http2 works??
+
+curl http://api-ns.devopsbyexample.io/foo/asd
