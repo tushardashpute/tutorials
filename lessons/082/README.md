@@ -160,6 +160,11 @@ annotations:
 kubectl apply -f prometheus/2-prometheus/4-ingress.yaml
 ```
 - Make a mistake in the directive and apply
+- Render the full nginx config
+```bash
+kubectl get pods -n ingress
+kubectl exec <pod> -- cat /etc/nginx/nginx/conf
+```
 
 ## Create Ingress for Grafana
 - Get services
