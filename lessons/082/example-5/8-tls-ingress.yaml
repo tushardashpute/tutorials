@@ -5,6 +5,7 @@ metadata:
   name: foo-api
   namespace: staging
 spec:
+  ingressClassName: external-nginx
   tls:
   - hosts:
       - foo-api.devopsbyexample.io

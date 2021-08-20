@@ -5,6 +5,7 @@ metadata:
   name: virtual-hosting
   namespace: staging
 spec:
+  ingressClassName: external-nginx
   rules:
   - host: foo.devopsbyexample.io
     http:

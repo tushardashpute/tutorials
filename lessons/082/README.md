@@ -39,7 +39,7 @@ helm repo update
 helm search repo nginx
 ```
 
-- Create `values.yaml` to override default [parameters]()
+- Create `values.yaml` to override default [parameters](https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml)
 
 - Generate YAML from the Helm chart
 ```bash
@@ -135,7 +135,7 @@ kubectl get svc -n monitoring
 
 - Create ingress
 ```bash
-kubectl apply -f prometheus/2-prometheus/4-ingress.yaml
+kubectl apply -f example-1/prometheus.yaml
 ```
 
 - Get ingresses
@@ -157,14 +157,15 @@ annotations:
     more_set_headers 'Foo: bar';
 ```
 ```bash
-kubectl apply -f prometheus/2-prometheus/4-ingress.yaml
+kubectl apply -f example-1/prometheus.yaml
 ```
 - Make a mistake in the directive and apply
 - Render the full nginx config
 ```bash
 kubectl get pods -n ingress
-kubectl exec <pod> -- cat /etc/nginx/nginx/conf
+kubectl exec <pod> -n ingress -- cat /etc/nginx/nginx.conf
 ```
+- Search for `more_set_headers`
 
 ## Create Ingress for Grafana
 - Get services
@@ -174,7 +175,7 @@ kubectl get svc -n monitoring
 
 - Create ingress
 ```bash
-kubectl apply -f grafana/3-ingress.yaml
+kubectl apply -f example-2/grafana.yaml
 ```
 
 - Get ingresses
@@ -190,10 +191,16 @@ kubectl get ing -n monitoring
 
 - Create `app`
 
-- Create `example-1`
+- Create `example-3`
 
-
-
+- Apply example-3
+```bash
+kubectl apply -f example-3
+```
+- Get ingress
+```bash
+kubectl get ing -n staging
+```
 
 
 
