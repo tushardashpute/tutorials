@@ -8,11 +8,11 @@ metadata:
   labels:
     helm.sh/chart: ingress-nginx-3.35.0
     app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/instance: my-ingress
+    app.kubernetes.io/instance: my-ing
     app.kubernetes.io/version: "0.48.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: admission-webhook
-  name: my-ingress-ingress-nginx-admission
+  name: my-ing-ingress-nginx-admission
 webhooks:
   - name: validate.nginx.ingress.kubernetes.io
     matchPolicy: Equivalent
@@ -34,5 +34,5 @@ webhooks:
     clientConfig:
       service:
         namespace: "ingress"
-        name: my-ingress-ingress-nginx-controller-admission
+        name: my-ing-ingress-nginx-controller-admission
         path: /networking/v1beta1/ingresses

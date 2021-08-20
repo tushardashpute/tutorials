@@ -6,17 +6,17 @@ metadata:
   labels:
     helm.sh/chart: ingress-nginx-3.35.0
     app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/instance: my-ingress
+    app.kubernetes.io/instance: my-ing
     app.kubernetes.io/version: "0.48.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
-  name: my-ingress-ingress-nginx-controller
+  name: my-ing-ingress-nginx-controller
   namespace: ingress
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: ingress-nginx
-      app.kubernetes.io/instance: my-ingress
+      app.kubernetes.io/instance: my-ing
       app.kubernetes.io/component: controller
   replicas: 1
   revisionHistoryLimit: 10
@@ -25,7 +25,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: ingress-nginx
-        app.kubernetes.io/instance: my-ingress
+        app.kubernetes.io/instance: my-ing
         app.kubernetes.io/component: controller
     spec:
       dnsPolicy: ClusterFirst
@@ -40,10 +40,10 @@ spec:
                 - /wait-shutdown
           args:
             - /nginx-ingress-controller
-            - --publish-service=$(POD_NAMESPACE)/my-ingress-ingress-nginx-controller
+            - --publish-service=$(POD_NAMESPACE)/my-ing-ingress-nginx-controller
             - --election-id=ingress-controller-leader
             - --ingress-class=external-nginx
-            - --configmap=$(POD_NAMESPACE)/my-ingress-ingress-nginx-controller
+            - --configmap=$(POD_NAMESPACE)/my-ing-ingress-nginx-controller
             - --validating-webhook=:8443
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
@@ -119,9 +119,9 @@ spec:
                 values:
                 - ingress-nginx
             topologyKey: kubernetes.io/hostname
-      serviceAccountName: my-ingress-ingress-nginx
+      serviceAccountName: my-ing-ingress-nginx
       terminationGracePeriodSeconds: 300
       volumes:
         - name: webhook-cert
           secret:
-            secretName: my-ingress-ingress-nginx-admission
+            secretName: my-ing-ingress-nginx-admission

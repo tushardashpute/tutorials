@@ -3,7 +3,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: my-ingress-ingress-nginx-admission-patch
+  name: my-ing-ingress-nginx-admission-patch
   namespace: ingress
   annotations:
     "helm.sh/hook": post-install,post-upgrade
@@ -11,18 +11,18 @@ metadata:
   labels:
     helm.sh/chart: ingress-nginx-3.35.0
     app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/instance: my-ingress
+    app.kubernetes.io/instance: my-ing
     app.kubernetes.io/version: "0.48.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: admission-webhook
 spec:
   template:
     metadata:
-      name: my-ingress-ingress-nginx-admission-patch
+      name: my-ing-ingress-nginx-admission-patch
       labels:
         helm.sh/chart: ingress-nginx-3.35.0
         app.kubernetes.io/name: ingress-nginx
-        app.kubernetes.io/instance: my-ingress
+        app.kubernetes.io/instance: my-ing
         app.kubernetes.io/version: "0.48.1"
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/component: admission-webhook
@@ -33,10 +33,10 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
             - patch
-            - --webhook-name=my-ingress-ingress-nginx-admission
+            - --webhook-name=my-ing-ingress-nginx-admission
             - --namespace=$(POD_NAMESPACE)
             - --patch-mutating=false
-            - --secret-name=my-ingress-ingress-nginx-admission
+            - --secret-name=my-ing-ingress-nginx-admission
             - --patch-failure-policy=Fail
           env:
             - name: POD_NAMESPACE
@@ -44,7 +44,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
       restartPolicy: OnFailure
-      serviceAccountName: my-ingress-ingress-nginx-admission
+      serviceAccountName: my-ing-ingress-nginx-admission
       securityContext:
         runAsNonRoot: true
         runAsUser: 2000

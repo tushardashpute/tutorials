@@ -38,10 +38,12 @@ helm repo update
 ```bash
 helm search repo nginx
 ```
-- Create `values.yaml` to override default parameters
+
+- Create `values.yaml` to override default [parameters]()
+
 - Generate YAML from the Helm chart
 ```bash
-helm template my-ingress ingress-nginx/ingress-nginx \
+helm template my-ing ingress-nginx/ingress-nginx \
   --namespace ingress \
   --version 3.35.0 \
   --values values.yaml \
@@ -50,13 +52,80 @@ helm template my-ingress ingress-nginx/ingress-nginx \
 
 - Deploy Nginx ingress with Helm
 ```bash
-helm install my-ingress ingress-nginx/ingress-nginx \
+helm install my-ing ingress-nginx/ingress-nginx \
   --namespace ingress \
   --version 3.35.0 \
   --values values.yaml \
   --create-namespace
 ```
 
+- List Helm releases
+```bash
+helm list -n ingress
+```
+
+- Get pods
+```bash
+kubectl get pods -n ingress
+```
+- Get services
+```bash
+kubectl get svc -n ingress
+```
+
+## Monitor Nginx Ingress with Prometheus
+- Port forward Prometheus to localhost for now
+```bash
+kubectl get svc -n monitoring
+kubectl port-forward svc/prometheus-operated 9090 -n monitoring
+```
+
+- Add monitoring label to ingress namespace
+```bash
+kubectl edit namespace ingress
+```
+```yaml
+monitoring: prometheus
+```
+
+## Deploy Grafana on Kubernetes Cluster
+- Generate admin password for Grafana
+```bash
+echo -n "devops123" | base64
+```
+
+- Decode
+```
+echo "devops123" | base64 -d
+```
+
+- Deploy grafana
+```bash
+kubectl apply -f grafana
+```
+
+- Get pods
+```bash
+kubectl get pods -n monitoring
+```
+
+## Import Nginx Ingress Controller Grafana Dashboard
+- Port forward Grafana to localhost for now
+```bash
+kubectl get svc -n monitoring
+kubectl port-forward svc/grafana 3000 -n monitoring
+```
+
+- Login to Grafana, user: `admin`, password: `devops123`
+
+- Add Prometheus datasource
+```bash
+http://prometheus-operated:9090
+```
+
+- Google it, `nginx ingress grafana dashboard`
+
+- Import `9614` dashboard
 
 
 
@@ -90,25 +159,6 @@ helm install my-ingress ingress-nginx/ingress-nginx \
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2. Deploy Grafana
 
 5. Create ingress for Prometheus
 6. Create ingress for Grafana
