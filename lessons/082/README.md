@@ -127,6 +127,39 @@ http://prometheus-operated:9090
 
 - Import `9614` dashboard
 
+## Create Ingress for Prometheus
+- Get services
+```bash
+kubectl get svc -n monitoring
+```
+
+- Create ingress
+```bash
+kubectl apply -f prometheus/2-prometheus/4-ingress.yaml
+```
+
+- Get ingresses
+```bash
+kubectl get ing -n monitoring
+kubectl get svc -n ingress
+```
+
+- Create CNAME record for `prometheus.devopsbyexample.io`
+
+- Go to `http://prometheus.devopsbyexample.io`
+
+## Test Nginx Ingress Admission Webhook
+
+- Add valid ngin directive annotation to Prometheus ingress
+```yaml
+annotations:
+  nginx.ingress.kubernetes.io/configuration-snippet: |
+    more_set_headers 'Foo: bar';
+```
+```bash
+kubectl apply -f prometheus/2-prometheus/4-ingress.yaml
+```
+- Make a mistake in the directive and apply
 
 
 
@@ -155,12 +188,6 @@ http://prometheus-operated:9090
 
 
 
-
-
-
-
-
-5. Create ingress for Prometheus
 6. Create ingress for Grafana
 7. Simple fanout example
 Name based virtual hosting
