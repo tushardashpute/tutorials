@@ -27,7 +27,6 @@ Topics
 - http/2 h2 h2c (plain text http)
 - distrolless image include ca time zones users
 
-
 ```
 eksctl create cluster -f eks.yaml
 ```
@@ -73,7 +72,7 @@ curl http://bar.devopsbyexample.io/
 - [values.yaml](https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml)
 - [Configuration options](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#configuration-options)
 - [Exposing TCP and UDP services](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/)
-
+Admission web hook - https://kubernetes.github.io/ingress-nginx/how-it-works/#avoiding-outage-from-wrong-configuration
 
 
 Generate the CA configuration file, certificate, and private key:

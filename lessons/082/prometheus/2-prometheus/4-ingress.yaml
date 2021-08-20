@@ -4,6 +4,9 @@ kind: Ingress
 metadata:
   name: prometheus
   namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers 'Foo: bar';
 spec:
   ingressClassName: external-nginx
   rules:
