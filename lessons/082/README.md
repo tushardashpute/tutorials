@@ -2,10 +2,62 @@
 
 [YouTube Tutorial]()
 
-1. Deploy Prometheus
+## Prerequisites
+- [Kubernetes](https://kubernetes.io/)
+- [Helm](https://helm.sh/)
+
+## Deploy Prometheus on Kubernetes Cluster 
+- Deploy CRDs
+```bash
+kubectl apply -f prometheus/0-crd
+```
+- Deploy Prometheus Operator
+```bash
+kubectl apply -f prometheus/1-prometheus-operator
+```
+- Deploy Prometheus
+```bash
+kubectl apply -f prometheus/2-prometheus
+```
+## Deploy Nginx Ingress Controller (YAML & HELM)
+- Add Nginx ingress helm repo
+```bash
+helm repo add ingress-nginx \
+  https://kubernetes.github.io/ingress-nginx
+```
+- Update Helm repo
+```bash
+helm repo update
+```
+- Search for Helm
+```bash
+helm search repo nginx
+```
+- Create `values.yaml` to override default parameters
+- Generate YAML from the Helm chart
+```bash
+helm template my-ingress ingress-nginx/ingress-nginx \
+  --namespace ingress \
+  --version 3.35.0 \
+  --values values.yaml \
+  --output-dir nginx
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2. Deploy Grafana
-4. Show how to deploy with helm
-3. Deploy Ingress with YAML
+
 5. Create ingress for Prometheus
 6. Create ingress for Grafana
 7. Simple fanout example
@@ -59,7 +111,10 @@ curl http://foo.devopsbyexample.io/
 curl http://bar.devopsbyexample.io/
 
 ## Clean Up
-- `helm repo remove nginx-stable`
+- Remove Nginx ingress repo
+```bash
+helm repo remove ingress-nginx
+```
 - remove ca from keychain
 
 ## Links
