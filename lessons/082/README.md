@@ -19,6 +19,11 @@ kubectl apply -f prometheus/1-prometheus-operator
 ```bash
 kubectl apply -f prometheus/2-prometheus
 ```
+- Check Prometheus pods
+```bash
+kubectl get pods -n monitoring
+```
+
 ## Deploy Nginx Ingress Controller (YAML & HELM)
 - Add Nginx ingress helm repo
 ```bash
@@ -42,6 +47,53 @@ helm template my-ingress ingress-nginx/ingress-nginx \
   --values values.yaml \
   --output-dir nginx
 ```
+
+- Deploy Nginx ingress with Helm
+```bash
+helm install my-ingress ingress-nginx/ingress-nginx \
+  --namespace ingress \
+  --version 3.35.0 \
+  --values values.yaml \
+  --create-namespace
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -111,9 +163,10 @@ curl http://foo.devopsbyexample.io/
 curl http://bar.devopsbyexample.io/
 
 ## Clean Up
-- Remove Nginx ingress repo
+- Remove Helm repos
 ```bash
 helm repo remove ingress-nginx
+helm repo remove bitnami
 ```
 - remove ca from keychain
 
