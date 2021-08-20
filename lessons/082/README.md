@@ -202,30 +202,194 @@ kubectl apply -f example-3
 kubectl get ing -n staging
 ```
 
+- Create CNAME record for `api`
 
+- Test with curl
+```bash
+curl http://api.devopsbyexample.io/foo/ytafsd
+curl http://api.devopsbyexample.io/bar/123
+```
 
+## Virtual Hosting Ingress Example
 
+- Create `example-4`
 
+- Apply example-4
+```bash
+kubectl apply -f example-4
+```
+- Get ingress
+```bash
+kubectl get ing -n staging
+```
 
+- Create CNAME record for `foo` and `bar`
 
+- Test with curl
+```bash
+curl http://foo.devopsbyexample.io/hello
+curl http://bar.devopsbyexample.io/blog
+```
 
+## Nginx Ingress TLS Example
+- Install cfssl
+```bash
+brew install cfssl
+```
+- Create config `certs/0-config.json`
+- Create CA certificate request `certs/1-ca-csr.json`
+- Change directory to `certs` and generate CA
+```bash
+cfssl gencert -initca 1-ca-csr.json | cfssljson -bare ca
+openssl x509 -in ca.pem -text -noout
+```
+- Create certificate request for `foo-api.devopsbyexample.io` domain `certs/2-foo-api-csr.json`
+- Generate certificate
+```bash
+cfssl gencert \
+  -ca=ca.pem \
+  -ca-key=ca-key.pem \
+  -config=0-config.json \
+  -profile=demo \
+  2-foo-api-csr.json | cfssljson -bare foo-api
+```
+- Open with OpenSSL
+```bash
+openssl x509 -in foo-api.pem -text -noout
+```
+- Create Kubernetes secret `example-5/7-tls-secret.yaml`
+```yaml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: foo-api-devopsbyexample-io-tls
+  namespace: staging
+type: kubernetes.io/tls
+data:
+  tls.crt: base64
+  tls.key: base64
+```
 
+- Encode tls certificate `certs/foo-api.pem` to base64
+```bash
+echo -n "tls-cert-content" | base64
+```
+- Encode private key `certs/foo-api.pem` to base64
+```bash
+echo -n "tls-private-key-content" | base64
+```
+- Create ingress `example-5/8-tls-ingress.yaml`
+- Switch directory and apply
+```bash
+cd ..
+kubectl apply -f example-5
+```
+- Get ingress
+```bash
+kubectl get ing -n staging
+```
+- Create CNAME record for `foo-api`
+- Go to `https://foo-api.devopsbyexample.io`
+- Add CA to KeyChain
 
+## Nginx Ingress Different Namespaces Example
 
+- Create `example-6`
+- Apply
+```bash
+kubectl apply -f example-6
+```
+- Use local service
+- Get pods in both namespaces
+```bash
+kubectl get pods -n foo
+kubectl get pods -n bar
+```
+- Get ing
+```bash
+kubectl get ing -n foo
+```
+- Create CNAME for `api-ns`
+- Test
+```bash
+curl http://api-ns.devopsbyexample.io/foo/asd
+curl http://api-ns.devopsbyexample.io/bar/asd
+```
+- Create `example-6/6-bar-external.yaml`
+- Update `example-6/5-ingress.yaml`
+- Apply
+```bash
+kubectl apply -f example-6
+```
+- Test
+```bash
+curl http://api-ns.devopsbyexample.io/bar/asd
+```
+## Nginx Ingress TCP Example
 
+- Create following files
+  - `example-7/0-namespace.yaml`
+  - `example-7/1-secrets.yaml`
+  - `example-7/2-statefulset.yaml`
+  - `example-7/3-service.yaml`
 
+- Apply
 
+```bash
+kubectl apply -f example-7
+```
+```bash
+kubectl get pods -n database
+```
 
+- Create `example-7/4-configmap.yaml`
+```bash
+kubectl apply -f example-7/4-configmap.yaml
+```
+- Add tcp configmap flag
+```bash
+- --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+```
 
+```bash
+kubectl get svc my-ing-ingress-nginx-controller -n ingress
+kubectl get deployment -n ingress
+kubectl edit deployment -n ingress my-ing-ingress-nginx-controller
+kubectl edit svc my-ing-ingress-nginx-controller -n ingress
+```
+```yaml
+- name: postgres
+  port: 5444
+  protocol: TCP
+```
+```bash
+kubectl get svc my-ing-ingress-nginx-controller -n ingress
+```
+- Go to AWS open LB and security group
+- Create CNAME for postgres
+```bash
+kubectl get svc my-ing-ingress-nginx-controller -n ingress
+```
+```bash
+psql --host postgres.devopsbyexample.io \
+  --port 5444 \
+  --username postgres \
+  --password
+```
+```bash
+\l
+```
 
-
-7. Simple fanout example
-Name based virtual hosting
-8. Fanout in different namespaces example
-9. Virual hosting
-10. tls
-11. tcp
-12. Prometheus/Grafana monitoring
+## Monitor Nginx Ingress with Grafana
+- Open `http://grafana.devopsbyexample.io`
+- Create some traffic
+```bash
+curl http://api.devopsbyexample.io/bar/123asd
+curl http://bar.devopsbyexample.io/bar
+curl http://foo-ns.devopsbyexample.io/bar
+curl http://api-ns.devopsbyexample.io/foo/asdad
+```
 
 Topics
 - rewrite-target
@@ -276,6 +440,9 @@ helm repo remove ingress-nginx
 helm repo remove bitnami
 ```
 - remove ca from keychain
+```bash
+brew remove cfssl
+```
 
 ## Links
 - [K8s Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)

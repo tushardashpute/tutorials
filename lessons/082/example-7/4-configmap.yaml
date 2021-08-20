@@ -5,4 +5,4 @@ metadata:
   name: tcp-services
   namespace: ingress
 data:
-  5432: database/postgres-postgresql-headless:5432
+  5444: database/postgres-postgresql-headless:5432
