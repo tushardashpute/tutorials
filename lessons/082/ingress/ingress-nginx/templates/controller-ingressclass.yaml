@@ -11,7 +11,5 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: external-nginx
-  annotations:
-    ingressclass.kubernetes.io/is-default-class: "true"
 spec:
   controller: k8s.io/ingress-nginx
