@@ -161,6 +161,31 @@ kubectl apply -f prometheus/2-prometheus/4-ingress.yaml
 ```
 - Make a mistake in the directive and apply
 
+## Create Ingress for Grafana
+- Get services
+```bash
+kubectl get svc -n monitoring
+```
+
+- Create ingress
+```bash
+kubectl apply -f grafana/3-ingress.yaml
+```
+
+- Get ingresses
+```bash
+kubectl get ing -n monitoring
+```
+
+- Create CNAME record for `grafana.devopsbyexample.io`
+
+- Go to `http://grafana.devopsbyexample.io`
+
+## Simple Fanout Ingress Example
+
+- Create `app`
+
+- Create `example-1`
 
 
 
@@ -182,13 +207,6 @@ kubectl apply -f prometheus/2-prometheus/4-ingress.yaml
 
 
 
-
-
-
-
-
-
-6. Create ingress for Grafana
 7. Simple fanout example
 Name based virtual hosting
 8. Fanout in different namespaces example
