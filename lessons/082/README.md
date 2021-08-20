@@ -47,7 +47,7 @@ helm template my-ing ingress-nginx/ingress-nginx \
   --namespace ingress \
   --version 3.35.0 \
   --values values.yaml \
-  --output-dir nginx
+  --output-dir my-ing
 ```
 
 - Deploy Nginx ingress with Helm
