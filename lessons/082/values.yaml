@@ -23,10 +23,7 @@ controller:
     enabled: true
   service:
     annotations:
-      # defaults to clasic
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
-      # to create internal load balancer with private ip
-      # service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
   metrics:
     enabled: true
     serviceMonitor:
