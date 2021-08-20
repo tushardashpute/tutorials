@@ -7,7 +7,7 @@ controller:
   ingressClass: external-nginx
   ingressClassResource:
     enabled: true
-    default: true
+    default: false
   affinity:
     podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
