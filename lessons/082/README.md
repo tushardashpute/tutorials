@@ -6,8 +6,16 @@
 - [Kubernetes](https://kubernetes.io/)
 - [Helm](https://helm.sh/)
 
-## Deploy Prometheus on Kubernetes Cluster 
-- Deploy CRDs
+## Deploy Prometheus on Kubernetes Cluster
+- Create following CRDs and apply them
+  - `prometheus/0-crd/0-alertmanagerconfigs.yaml`
+  - `prometheus/0-crd/1-alertmanagers.yaml`
+  - `prometheus/0-crd/2-podmonitors.yaml`
+  - `prometheus/0-crd/3-probes.yaml`
+  - `prometheus/0-crd/4-prometheuses.yaml`
+  - `prometheus/0-crd/5-prometheusrules.yaml`
+  - `prometheus/0-crd/6-servicemonitors.yaml`
+  - `prometheus/0-crd/7-thanosrulers.yaml`
 ```bash
 kubectl apply -f prometheus/0-crd
 ```
