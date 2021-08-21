@@ -7,7 +7,7 @@
 - [Helm](https://helm.sh/)
 
 ## Deploy Prometheus on Kubernetes Cluster
-- Create following CRDs and apply them
+- Create following `CRDs` and apply them
   - `prometheus/0-crd/0-alertmanagerconfigs.yaml`
   - `prometheus/0-crd/1-alertmanagers.yaml`
   - `prometheus/0-crd/2-podmonitors.yaml`
@@ -20,10 +20,23 @@
 kubectl apply -f prometheus/0-crd
 ```
 - Deploy Prometheus Operator
+  - `prometheus/1-prometheus-operator/0-monitoring-ns.yaml`
+  - `prometheus/1-prometheus-operator/1-crd-cluster-roles.yaml`
+  - `prometheus/1-prometheus-operator/2-service-account.yaml`
+  - `prometheus/1-prometheus-operator/3-cluster-role.yaml`
+  - `prometheus/1-prometheus-operator/4-cluster-role-binding.yaml`
+  - `prometheus/1-prometheus-operator/5-deployment.yaml`
+  - `prometheus/1-prometheus-operator/5-deployment.yaml`
+  - `prometheus/1-prometheus-operator/6-service.yaml`
+  - `prometheus/1-prometheus-operator/7-service-monitor.yaml`
 ```bash
 kubectl apply -f prometheus/1-prometheus-operator
 ```
 - Deploy Prometheus
+  - `prometheus/2-prometheus/0-service-account.yaml`
+  - `prometheus/2-prometheus/1-cluster-role.yaml`
+  - `prometheus/2-prometheus/2-cluster-role-binding.yaml`
+  - `prometheus/2-prometheus/3-prometheus.yaml`
 ```bash
 kubectl apply -f prometheus/2-prometheus
 ```
@@ -33,16 +46,17 @@ kubectl get pods -n monitoring
 ```
 
 ## Deploy Nginx Ingress Controller (YAML & HELM)
-- Add Nginx ingress helm repo
+
+- Add Nginx ingress Helm repo
 ```bash
 helm repo add ingress-nginx \
   https://kubernetes.github.io/ingress-nginx
 ```
-- Update Helm repo
+- Update Helm repository
 ```bash
 helm repo update
 ```
-- Search for Helm
+- Search for `nginx` Helm Chart
 ```bash
 helm search repo nginx
 ```
@@ -72,7 +86,7 @@ helm install my-ing ingress-nginx/ingress-nginx \
 helm list -n ingress
 ```
 
-- Get pods
+- Get `nginx` pods
 ```bash
 kubectl get pods -n ingress
 ```
